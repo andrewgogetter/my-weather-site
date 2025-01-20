@@ -1,2 +1,0 @@
-#we need this file because of easier import, import control, adding some code and recognizing the package directory which allows us to import modules from it
-#it also indicates that the folder contains the Python files

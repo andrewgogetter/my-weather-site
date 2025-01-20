@@ -1,1 +1,0 @@
-console.log('This is JS from your About page') #"console" provides access to the browsers console, and the "log" method prints a message
