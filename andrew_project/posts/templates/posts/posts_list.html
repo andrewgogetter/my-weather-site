@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Posts
+{% endblock %}
+
+{% block content %}
+    <section> <! -- the "section" tag helps us to organize the content on our page -->
+    <h1>Posts</h1>
+    {% for post in my_posts %} <! -- it means that we iterate every value of our key in "posts":posts and set for them title, body and date. Our value is "posts=Post.objects.all().order_by("-date")" -->
+        <article class="post"> <! --  we have to use the "article" tag to structure our data within the "section" tag. When we say "class="post" it means that we're applying the css code -->
+            <h2>
+                <a href="{%  url 'posts:page' slug=post.slug %}"> <! -- this line of the code allows us to get to the specific post. It refers to the "urls.py" file where "posts" is an "app_name" and page is a "name". When it tells "slug=post.slug" it means the second one in the "urls.py" file-->
+                    {{ post.title }}
+                </a>
+            </h2>
+            <p>{{ post.date }} by {{ post.author }}</p>
+            <p>{{ post.body }}</p>
+        </article>
+    {% endfor %}
+    </section>
+{% endblock %}

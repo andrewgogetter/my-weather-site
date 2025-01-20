@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    User Login
+{% endblock %}
+
+{% block content %}
+    <h1>User Login</h1>
+    <form class="form-with-validation" action="{% url 'users:login' %}" method="post">
+        {% csrf_token %}
+        {{ my_form }} <! -- it refers to {"my_form": form} which is equivalent of "form=AuthenticationForm(data=request.POST)"   -->
+        {% if request.GET.next %} <! -- it ensures that a user will be proceeded to the url that preceded by the word "next"   -->
+            <input type="hidden" name="next" value="{{ request.GET.next }}"/> <! -- The "type" tag is hidden because it prevents users from seeing what is the next url. The "value" tag ensures the actual url the same that the one in the "if" statement   -->
+        {% endif %}
+        <button class="form-submit">Submit</button>
+    </form>
+{% endblock %}
