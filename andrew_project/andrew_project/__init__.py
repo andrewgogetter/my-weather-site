@@ -1,0 +1,1 @@
+#this file indicates that the Python dir should be treated as a package. It means that we can import files with the "." notation. It can lead to potential errors with names, and we can't import modules

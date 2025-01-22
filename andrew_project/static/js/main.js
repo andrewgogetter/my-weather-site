@@ -1,0 +1,1 @@
+console.log('This is JS from your About page') //it makes possible for us to open the website dev console

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %} <!-- it means that we're loading the "static" dir -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            Django App <!-- this is the title of our url and it set by default -->
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- rel means relate so it sets the css stylesheet. It applies the css style to our website (to all our pages). If we want the different style for every page then we have to apply it in the templates -->
+    <script src="{% static 'js/main.js' %}" defer></script> <!-- it means that this js script getting executed right after the whole code. This improves the loading performance -->
+</head>
+<body>
+    <nav>
+        <a href="/">
+            <span role="img" aria-label="Home" title="Home">Home</span> <!-- area label used for blind people. title="home" appears when we mouse over -->
+        </a> |
+        <a href="/about">
+            <span role="img" aria-label="About" title="About">About</span>
+        </a> |
+        <a href="{% url 'posts:list' %}">
+            <span role="img" aria-label="Posts" title="Posts">Posts</span>
+        </a> |
+        {% if user.is_authenticated %} <!-- it means that these 2 urls appear only if a user authed -->
+            <a href="{% url 'posts:new-post' %}">
+                <span role="img" aria-label="New Post" title="New Post">New Post</span>
+            </a> |
+            <form class="logout" action="{% url 'users:logout' %}" method="post">
+                {% csrf_token %} <!-- to protect our data when we log out -->
+                <button class="logout-button" aria-label="User Logout" title="User Logout">Logout</button>
+            </form>
+        {% else %} <!-- it means that these 2 urls appear only if a user authed -->
+            <a href="{% url 'users:register' %}">
+                <span role="img" aria-label="User Registration" title="User Registration">User Registration</span>
+            </a> |
+            <a href="{% url 'users:login' %}">
+                <span role="img" aria-label="User Login" title="User Login">User Login</span>
+            </a>
+        {% endif %}
+    </nav>
+    <main> <!-- the "block content" have to be after the nav bar, so we can see the nav bar itself above it -->
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
